@@ -1,3 +1,22 @@
 {
-    "python.pythonPath": "/home/rajat_here/.pyenv/versions/miniconda3-4.7.12/envs/devenv/bin/python"
+    "python.pythonPath": "/home/rajat_here/.pyenv/versions/miniconda3-4.7.12/envs/devenv/bin/python",
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "editor.formatOnSave": true,
+    "python.sortImports.args": [
+        "-sp .isort.cfg"
+    ],
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length=88"
+    ],
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        },
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+        "files.trimTrailingWhitespace": true,
+    },
+    "python.languageServer": "Jedi"
 }
