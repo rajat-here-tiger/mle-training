@@ -1,58 +1,37 @@
 import pandas as pd
 import pytest
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.linear_model import LinearRegression
-from sklearn.tree import DecisionTreeRegressor
-
-from mle_training import score_pretrained
 
 
 @pytest.fixture(scope="package")
-def X_data():
-    df = pd.DataFrame.from_dict(
-        {
-            "longitude": {5241: -118.39, 10970: -117.86, 20351: -119.05},
-            "latitude": {5241: 34.12, 10970: 33.77, 20351: 34.21},
-            "housing_median_age": {5241: 29.0, 10970: 39.0, 20351: 27.0},
-            "total_rooms": {5241: 6447.0, 10970: 4159.0, 20351: 4357.0},
-            "total_bedrooms": {5241: 1012.0, 10970: 655.0, 20351: 926.0},
-            "population": {5241: 2184.0, 10970: 1669.0, 20351: 2110.0},
-            "households": {5241: 960.0, 10970: 651.0, 20351: 876.0},
-            "median_income": {5241: 8.2816, 10970: 4.6111, 20351: 3.0119},
-            "rooms_per_household": {
-                5241: 6.715625,
-                10970: 6.38863287250384,
-                20351: 4.973744292237443,
-            },
-            "bedrooms_per_room": {
-                5241: 0.1569722351481309,
-                10970: 0.15748978119740323,
-                20351: 0.2125315584117512,
-            },
-            "population_per_household": {
-                5241: 2.275,
-                10970: 2.563748079877112,
-                20351: 2.4086757990867578,
-            },
-            "ocean_proximity_INLAND": {5241: 0, 10970: 0, 20351: 0},
-            "ocean_proximity_ISLAND": {5241: 0, 10970: 0, 20351: 0},
-            "ocean_proximity_NEAR BAY": {5241: 0, 10970: 0, 20351: 0},
-            "ocean_proximity_NEAR OCEAN": {5241: 0, 10970: 0, 20351: 0},
-        }
-    )
+def data():
+    df = pd.read_csv("data/small_sample_data/housing.csv")
     return df
 
 
-@pytest.fixture(scope="package")
-def y_data():
-    df = pd.Series({5241: 500001.0, 10970: 240300.0, 20351: 218200.0})
-    return df
+def test_model_score(data):
+    import numpy as np
 
+    from mle_training.utils import data_preprocess as preprocess
 
-@pytest.mark.parametrize(
-    "model", [LinearRegression(), DecisionTreeRegressor(), RandomForestRegressor()]
-)
-def test_model_score(model, X_data, y_data):
-    assert isinstance(
-        score_pretrained.model_score(model.fit(X_data, y_data), X_data, y_data), float
+    housing = data
+    # Stratified split based on income category
+    train_data, test_data = preprocess.data_strat_split(
+        data=housing, test_size=0.2, random_state=42
     )
+
+    # Fit missing value imputer on train data
+    preprocess.fit(train_data=train_data)
+
+    # Transform train and test data
+    X_train, y_train = preprocess.transform(data=train_data)
+    X_test, y_test = preprocess.transform(data=test_data)
+
+    from mle_training import score_pretrained  # module to score pretrained model
+    from mle_training import train_score  # train and score module
+
+    # Fit model and score on training set
+    lin_model = train_score.linear_reg_model(X=X_train, y=y_train)
+
+    # Score trained model on test set (can be a model stored in a pickle file)
+    lin_rmse = score_pretrained.model_score(model=lin_model, X=X_test, y=y_test)
+    assert np.round(lin_rmse, 3) == 67796.575
