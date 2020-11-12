@@ -37,16 +37,19 @@ pip install -e .
 ```
 python verify_correct_install.py
 ```
+6. Generate Sphinx Documentation
+```
+cd docs
+make html
+```
+
 # Structure of project
 ```
 .
 ├── README.md
-├── datasets
-│   └── housing
-│       ├── housing.csv
-│       └── housing.tgz
 ├── docs
 │   ├── Makefile
+│   ├── _static
 │   ├── conf.py
 │   ├── index.rst
 │   ├── make.bat
@@ -66,7 +69,6 @@ python verify_correct_install.py
 │       ├── __init__.py
 │       ├── data_exploration.py
 │       └── data_preprocess.py
-├── nonstandardcode.py
 ├── setup.py
 ├── tests
 │   ├── test_score_pretrained.py
