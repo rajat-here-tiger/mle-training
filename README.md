@@ -17,7 +17,7 @@ The following techniques have been used:
 ## To set up the project
 1. Clone the repository in a local directory.
 ```
-git clone https://github.com/rajat-here-tiger/mle-training/tree/packaging
+git clone https://github.com/rajat-here-tiger/mle-training
 cd mle-training
 ```
 2. Create and activate virtual python development environment. On terminal, run
