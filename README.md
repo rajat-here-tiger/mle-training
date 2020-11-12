@@ -39,17 +39,14 @@ python verify_correct_install.py
 ```
 # Structure of project
 ```
+.
 ├── README.md
-├── data
-│   └── raw
-│       └── housing.csv
+├── datasets
+│   └── housing
+│       ├── housing.csv
+│       └── housing.tgz
 ├── docs
 │   ├── Makefile
-│   ├── _build
-│   │   ├── doctrees
-│   │   └── html
-│   ├── _static
-│   ├── _templates
 │   ├── conf.py
 │   ├── index.rst
 │   ├── make.bat
@@ -59,7 +56,7 @@ python verify_correct_install.py
 ├── download_data.sh
 ├── env.yaml
 ├── exploration_notebook
-│   ├── example_run.ipynb
+│   └── example_notebook.ipynb
 ├── mle_training
 │   ├── __init__.py
 │   ├── predict.py
@@ -69,10 +66,12 @@ python verify_correct_install.py
 │       ├── __init__.py
 │       ├── data_exploration.py
 │       └── data_preprocess.py
+├── nonstandardcode.py
 ├── setup.py
 ├── tests
 │   ├── test_score_pretrained.py
 │   └── test_utils_data_exploration.py
+└── verify_correct_install.py
 ```
 
 ## Using the package
