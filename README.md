@@ -47,6 +47,9 @@ make html
 ```
 .
 ├── README.md
+├── data
+│   └── small_sample_data
+│       ├── housing.csv
 ├── docs
 │   ├── Makefile
 │   ├── _static
@@ -58,7 +61,7 @@ make html
 │   └── modules.rst
 ├── download_data.sh
 ├── env.yaml
-├── exploration_notebook
+├── notebooks
 │   └── example_notebook.ipynb
 ├── mle_training
 │   ├── __init__.py
