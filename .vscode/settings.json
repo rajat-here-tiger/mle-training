@@ -18,5 +18,6 @@
         "editor.tabSize": 4,
         "files.trimTrailingWhitespace": true,
     },
-    "python.languageServer": "Jedi"
+    "python.languageServer": "Microsoft",
+    "jupyter.jupyterServerType": "local"
 }
