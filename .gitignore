@@ -13,6 +13,7 @@ develop-eggs/
 dist/
 data/raw/
 downloads/
+notebooks/sample.ipynb
 eggs/
 .eggs/
 pickles/
