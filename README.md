@@ -48,13 +48,13 @@ make html
 .
 ├── README.md
 ├── data
+│   ├── raw
+│   │   └── housing.csv
 │   └── small_sample_data
-│       ├── housing.csv
+│       └── housing.csv
 ├── docs/
 ├── download_data.sh
 ├── env.yaml
-├── notebooks
-│   └── example_notebook.ipynb
 ├── mle_training
 │   ├── __init__.py
 │   ├── predict.py
@@ -64,8 +64,14 @@ make html
 │       ├── __init__.py
 │       ├── data_exploration.py
 │       └── data_preprocess.py
+├── notebooks
+│   └── example_notebook.ipynb
+├── pickles/
+│   ├── imputers/
+│   └── models/
+├── plots/
 ├── setup.py
-├── tests/
+└── tests/
 ```
 
 ## Using the package
