@@ -79,6 +79,10 @@ def data_strat_split(data, test_size: float = 0.2, random_state: int = 42):
         strat_train_set = data.loc[train_index]
         strat_test_set = data.loc[test_index]
 
+    logging.info("dropping income cat")
+    for set_ in (strat_train_set, strat_test_set):
+        set_.drop("income_cat", axis=1, inplace=True)
+
     return strat_train_set, strat_test_set
 
 
@@ -92,9 +96,7 @@ def fit(train_data):
     from sklearn.impute import SimpleImputer
 
     logging.info("Fitting imputer for missing values")
-    data = train_data.drop(
-        ["median_house_value", "ocean_proximity", "income_cat"], axis=1
-    ).copy()
+    data = train_data.drop(["median_house_value", "ocean_proximity"], axis=1).copy()
     imputer = SimpleImputer(strategy="median").fit(data)
     logging.info("Creating pickle file for Imputer")
     os.makedirs(os.path.dirname(PKL_IMPUTER), exist_ok=True)
@@ -116,7 +118,7 @@ def transform(data):
     logging.info("Extracting Dependent and Independent variables.")
     housing_label = data["median_house_value"]
     housing_data = data.drop(
-        ["median_house_value", "income_cat"], axis=1
+        ["median_house_value"], axis=1
     )  # drop labels for training set
 
     housing_num = housing_data.drop("ocean_proximity", axis=1)

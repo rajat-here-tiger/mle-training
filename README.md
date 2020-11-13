@@ -35,7 +35,7 @@ pip install -e .
 ```
 5. Verify correct installation
 ```
-python verify_correct_install.py
+pytest
 ```
 6. Generate Sphinx Documentation
 ```
@@ -50,15 +50,7 @@ make html
 ├── data
 │   └── small_sample_data
 │       ├── housing.csv
-├── docs
-│   ├── Makefile
-│   ├── _static
-│   ├── conf.py
-│   ├── index.rst
-│   ├── make.bat
-│   ├── mle_training.rst
-│   ├── mle_training.utils.rst
-│   └── modules.rst
+├── docs/
 ├── download_data.sh
 ├── env.yaml
 ├── notebooks
@@ -73,10 +65,7 @@ make html
 │       ├── data_exploration.py
 │       └── data_preprocess.py
 ├── setup.py
-├── tests
-│   ├── test_score_pretrained.py
-│   └── test_utils_data_exploration.py
-└── verify_correct_install.py
+├── tests/
 ```
 
 ## Using the package
