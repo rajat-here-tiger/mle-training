@@ -1,5 +1,3 @@
-import pickle
-
 import pandas as pd
 import pytest
 
@@ -51,15 +49,9 @@ def test_linear_reg_model(data, test):
     # Fit model and score on training set
     lin_model = train_score.linear_reg_model(X=X_train, y=y_train)
 
-    with open("pickles/models/Pickle_Linear_Model.pkl", "rb") as file:
-        save_model = pickle.load(file)
-
     y_pred_model = lin_model.predict(test)[0]
-    y_pred_save_model = save_model.predict(test)[0]
 
-    assert (np.round(y_pred_model, 3) == 136237.050) & (
-        np.round(y_pred_save_model, 3) == 136237.050
-    )
+    assert np.round(y_pred_model, 3) == 136237.050
 
 
 def test_tree_reg_model(data, test):
@@ -78,15 +70,9 @@ def test_tree_reg_model(data, test):
     # Fit model and score on training set
     tree_model = train_score.tree_reg_model(X=X_train, y=y_train)
 
-    with open("pickles/models/Pickle_Tree_Model.pkl", "rb") as file:
-        save_model = pickle.load(file)
-
     y_pred_model = tree_model.predict(test)[0]
-    y_pred_save_model = save_model.predict(test)[0]
 
-    assert (np.round(y_pred_model, 3) == 105300.0) & (
-        np.round(y_pred_save_model, 3) == 105300.0
-    )
+    assert np.round(y_pred_model, 3) == 105300.0
 
 
 def test_forest_reg_model(data, test):
@@ -105,12 +91,6 @@ def test_forest_reg_model(data, test):
     # Fit model and score on training set
     forest_model = train_score.forest_reg_model(X=X_train, y=y_train)
 
-    with open("pickles/models/Pickle_Forest_Model.pkl", "rb") as file:
-        save_model = pickle.load(file)
-
     y_pred_model = forest_model.predict(test)[0]
-    y_pred_save_model = save_model.predict(test)[0]
 
-    assert (np.round(y_pred_model, 3) == 134796.667) & (
-        np.round(y_pred_save_model, 3) == 134796.667
-    )
+    assert np.round(y_pred_model, 3) == 134796.667
